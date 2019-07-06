@@ -1,0 +1,49 @@
+# github.com/gogo/protobuf v1.2.1
+github.com/gogo/protobuf/proto
+# github.com/golang/protobuf v1.3.1
+github.com/golang/protobuf/proto
+github.com/golang/protobuf/jsonpb
+github.com/golang/protobuf/ptypes/struct
+# github.com/google/tink v1.3.0-rc1.0.20190705095401-62087020608e
+github.com/google/tink/go/subtle/aead
+github.com/google/tink/go/subtle/random
+github.com/google/tink/go/tink
+github.com/google/tink/go/aead
+github.com/google/tink/go/keyset
+github.com/google/tink/go/core/cryptofmt
+github.com/google/tink/go/core/primitiveset
+github.com/google/tink/go/core/registry
+github.com/google/tink/go/subtle/mac
+github.com/google/tink/proto/aes_ctr_go_proto
+github.com/google/tink/proto/aes_ctr_hmac_aead_go_proto
+github.com/google/tink/proto/aes_gcm_go_proto
+github.com/google/tink/proto/chacha20_poly1305_go_proto
+github.com/google/tink/proto/common_go_proto
+github.com/google/tink/proto/hmac_go_proto
+github.com/google/tink/proto/kms_envelope_go_proto
+github.com/google/tink/proto/tink_go_proto
+github.com/google/tink/proto/xchacha20_poly1305_go_proto
+github.com/google/tink/go/internal
+github.com/google/tink/go/subtle
+# github.com/inconshreveable/mousetrap v1.0.0
+github.com/inconshreveable/mousetrap
+# github.com/jroimartin/gocui v0.4.0
+github.com/jroimartin/gocui
+# github.com/mattn/go-runewidth v0.0.4
+github.com/mattn/go-runewidth
+# github.com/nsf/termbox-go v0.0.0-20190624072549-eeb6cd0a1762
+github.com/nsf/termbox-go
+# github.com/spf13/cobra v0.0.5
+github.com/spf13/cobra
+# github.com/spf13/pflag v1.0.3
+github.com/spf13/pflag
+# golang.org/x/crypto v0.0.0-20190701094942-4def268fd1a4
+golang.org/x/crypto/argon2
+golang.org/x/crypto/chacha20poly1305
+golang.org/x/crypto/blake2b
+golang.org/x/crypto/internal/chacha20
+golang.org/x/crypto/internal/subtle
+golang.org/x/crypto/poly1305
+# golang.org/x/sys v0.0.0-20190412213103-97732733099d
+golang.org/x/sys/unix
+golang.org/x/sys/cpu

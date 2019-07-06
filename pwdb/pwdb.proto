@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+import "google/protobuf/timestamp.proto";
+
+message RecordSet {
+  repeated Envelope records = 1;
+}
+
+message Envelope {
+  string name = 1;
+  bytes data = 2;
+}
+
+message Record {
+  google.protobuf.Timestamp create_time = 1;
+  google.protobuf.Timestamp update_time = 2;
+
+  string username = 3;
+  string password = 4;
+  string notes = 5;
+}

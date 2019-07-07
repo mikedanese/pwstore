@@ -1,15 +1,19 @@
 package main
 
 import (
+	"bytes"
 	"encoding/base64"
 	"fmt"
+	"io"
 	"io/ioutil"
 	"log"
 	"net/http"
 	_ "net/http/pprof"
 	"os"
+	"unicode/utf8"
 
 	"github.com/gogo/protobuf/proto"
+	"github.com/google/tink/go/subtle/random"
 	"github.com/mikedanese/pwstore/pwdb"
 	"github.com/spf13/cobra"
 	"github.com/spf13/pflag"
@@ -24,11 +28,22 @@ func main() {
 		Use: "pwstore",
 	}
 	addSub(root, &copyCmd{})
+	addSub(root, &genCmd{})
 
 	raw := &cobra.Command{
-		Use: "raw",
+		Use:   "raw",
+		Short: "Raw database access.",
 	}
 	root.AddCommand(raw)
+
+	completion := &cobra.Command{
+		Use:   "completion",
+		Short: "Generates bash completion scripts",
+		Run: func(cmd *cobra.Command, args []string) {
+			root.GenBashCompletion(os.Stdout)
+		},
+	}
+	root.AddCommand(completion)
 
 	addSub(raw, &getCmd{})
 	addSub(raw, &listCmd{})
@@ -181,6 +196,37 @@ func (c *copyCmd) run(cmd *cobra.Command, args []string) {
 	if c.username {
 		out = r.Username
 	}
-	fmt.Printf("\x1b]52;c;" + base64.StdEncoding.EncodeToString([]byte(out)) + "\x07")
+	ansiCopy(cmd.OutOrStdout(), out)
 	cmd.Println("ok")
+}
+
+func ansiCopy(w io.Writer, s string) {
+	fmt.Fprintf(os.Stdout, "\x1b]52;c;%s\x07", base64.StdEncoding.EncodeToString([]byte(s)))
+}
+
+type genCmd struct {
+	length int
+}
+
+func (c *genCmd) cmd() *cobra.Command {
+	return &cobra.Command{
+		Use: "gen",
+		Run: c.run,
+	}
+}
+
+func (c *genCmd) bindFlags(fs *pflag.FlagSet) {
+	fs.IntVarP(&c.length, "length", "l", 20, "")
+}
+
+func (c *genCmd) run(cmd *cobra.Command, args []string) {
+	var buf bytes.Buffer
+	for i := 0; i < c.length; {
+		bs := random.GetRandomBytes(4)
+		if utf8.Valid(bs) {
+			buf.Write(bs)
+			i++
+		}
+	}
+	cmd.Println(buf.String())
 }

@@ -13,6 +13,7 @@ go_library(
     deps = [
         "//pwdb:go_default_library",
         "//vendor/github.com/gogo/protobuf/proto:go_default_library",
+        "//vendor/github.com/google/tink/go/subtle/random:go_default_library",
         "//vendor/github.com/spf13/cobra:go_default_library",
         "//vendor/github.com/spf13/pflag:go_default_library",
     ],
